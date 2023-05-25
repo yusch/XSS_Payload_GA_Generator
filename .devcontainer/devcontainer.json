@@ -1,0 +1,11 @@
+{
+    "name": "PyTorch with Selenium",
+    "dockerFile": "Dockerfile",
+    "extensions": [
+        "ms-python.python"
+    ],
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "postCreateCommand": "pip install --upgrade pip && pip install -r requirements.txt"
+}
