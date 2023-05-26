@@ -6,6 +6,8 @@ import random
 import configparser
 from datetime import datetime
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
 
 # Printing colors
 OK_BLUE = '\033[94m'      # [*]
@@ -27,14 +29,14 @@ NONE = 'none'     # No label.
 
 # Utilty class
 class Utilty:
-    def __init__(self) -> None:
+    def __init__(self):
         # Read config.ini
         full_path = os.path.dirname(os.path.abspath(__file__))
         config = configparser.ConfigParser()
         try:
             config.read(os.path.join(full_path, 'config.ini'))
         except FileExistsError as err:
-            self.print_message(FAIL, 'File exists error: {}'.format(err)
+            self.print_message(FAIL, 'File exists error: {}'.format(err))
             sys.exit(1)
 
     # Print metasploit's symbol.
@@ -134,6 +136,7 @@ class Utilty:
             obj_browser.refresh()
         except Exception as e:
             # Run script.
+            wait = WebDriverWait(driver, 10)
             alert = wait.until(expected_conditions.alert_is_present())
             alert_text = alert.text
             print(alert_text)
