@@ -32,7 +32,7 @@ if __name__ == "__main__":
 
     # Genetic Algorithm setting value.
     html_eval_place_list = config['Genetic']['html_eval_place'].split('@')
-    max_try_num = int(confg['Genetic']['max_try_num'])
+    max_try_num = int(config['Genetic']['max_try_num'])
 
     # Selenium setting value.
     driver_dir = util.join_path(full_path, config['Selenium']['driver_dir'])
@@ -51,8 +51,8 @@ if __name__ == "__main__":
         # Create Web driver.
         obj_browser = webdriver.Firefox(
             executable_path=util.join_path(driver_dir, browser))
-        util.print_message(NOTE, 'Launched : {} {}'.format(
-            obj_browser.capabilities['browserName'], obj_browser.capabilities['browserVerion']))
+        # util.print_message(NOTE, 'Launched : {} {}'.format(
+        #   obj_browser.capabilities['browserName'], obj_browser.capabilities['browserVerion']))
 
         # Browser setting.
         obj_browser.set_window_size(window_width, window_height)
@@ -62,4 +62,14 @@ if __name__ == "__main__":
         for idx in range(max_try_num):
             util.print_message(
                 NONE, '{}/{} Create individuals using Genetic Algorithm.'.format(idx + 1, max_try_num))
-            ga = GeneticAlgorithm
+            ga = GeneticAlgorithm(template, obj_browser)
+            individual_list = ga.main()
+
+        # Generate many individuals from ga result.
+        util.print_message(
+            NOTE, 'Generate individual using Generative Adversarial Network.')
+        gan = GAN(template, obj_browser)
+        gan.main()
+
+        # Close browser.
+        obj_browser.close()

@@ -4,6 +4,7 @@ import sys
 import string
 import random
 import configparser
+import threading
 from datetime import datetime
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions
@@ -28,6 +29,8 @@ WARNING = 'warn'  # [!]
 NONE = 'none'     # No label.
 
 # Utilty class
+
+
 class Utilty:
     def __init__(self):
         # Read config.ini
@@ -116,6 +119,33 @@ class Utilty:
         return indivisual
 
      # Check individual using selenium.
+    # def check_individual_selenium(self, obj_browser, eval_html_path):
+    #     # Evaluate running script using selenium.
+    #     int_score = 0
+    #     error_flag = False
+    #
+    #     # Refresh browser for next evaluation.
+    #     try:
+    #         obj_browser.get(eval_html_path)
+    #     except Exception as e:
+    #         obj_browser.switch_to_alert.accept()
+    #         error_flag = True
+    #         return int_score, error_flag
+    #
+    #     # Judge JavaScript (include event handler).
+    #     try:
+    #         obj_browser.refresh()
+    #         ActionChains(obj_browser).move_by_offset(10, 10).perform()
+    #         obj_browser.refresh()
+    #     except Exception as e:
+    #         # Run script.
+    #         alert = wait.until(expected_conditions.alert_is_present())
+    #         alert_text = alert.text
+    #         print(alert_text)
+    #         alert.accept()
+    #         int_score = 1
+    #
+    #     return int_score, error_flag
     def check_individual_selenium(self, obj_browser, eval_html_path):
         # Evaluate running script using selenium.
         int_score = 0
@@ -125,7 +155,7 @@ class Utilty:
         try:
             obj_browser.get(eval_html_path)
         except Exception as e:
-            obj_browser.switch_to_alert.accept()
+            obj_browser.switch_to.alert.accept()
             error_flag = True
             return int_score, error_flag
 
@@ -136,11 +166,11 @@ class Utilty:
             obj_browser.refresh()
         except Exception as e:
             # Run script.
-            wait = WebDriverWait(driver, 10)
-            alert = wait.until(expected_conditions.alert_is_present())
+            event = threading.Event()
+            alert = event.wait.until(expected_conditions.alert_is_present())
             alert_text = alert.text
             print(alert_text)
-            alert.accept()
+            obj_browser.switch_to.alert.accept()
             int_score = 1
 
         return int_score, error_flag
