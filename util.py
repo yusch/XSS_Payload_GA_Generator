@@ -8,7 +8,7 @@ import threading
 from datetime import datetime
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.wait import WebDriverWait
 
 # Printing colors
 OK_BLUE = '\033[94m'      # [*]
@@ -146,6 +146,7 @@ class Utilty:
     #         int_score = 1
     #
     #     return int_score, error_flag
+
     def check_individual_selenium(self, obj_browser, eval_html_path):
         # Evaluate running script using selenium.
         int_score = 0
@@ -153,7 +154,8 @@ class Utilty:
 
         # Refresh browser for next evaluation.
         try:
-            obj_browser.get(eval_html_path)
+            obj_browser.get(
+                "file://" + eval_html_path)
         except Exception as e:
             obj_browser.switch_to.alert.accept()
             error_flag = True
@@ -162,15 +164,18 @@ class Utilty:
         # Judge JavaScript (include event handler).
         try:
             obj_browser.refresh()
-            ActionChains(obj_browser).move_by_offset(10, 10).perform()
+            obj_browser.execute_script("window.scrollTo(10, 10)")
             obj_browser.refresh()
         except Exception as e:
             # Run script.
-            event = threading.Event()
-            alert = event.wait.until(expected_conditions.alert_is_present())
-            alert_text = alert.text
-            print(alert_text)
-            obj_browser.switch_to.alert.accept()
+
+            # Check if alert is present and accept it.
+            try:
+                if obj_browser.switch_to.alert:
+                    obj_browser.switch_to.alert.accept()
+            except:
+                pass
+
             int_score = 1
 
         return int_score, error_flag

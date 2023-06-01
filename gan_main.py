@@ -29,7 +29,7 @@ class GAN:
     def __init__(self, template, browser):
         self.util = Utilty()
         self.template = template
-        self.browser = browser
+        self.obj_browser = browser
 
         # Read config.ini
         full_path = os.path.dirname(os.path.abspath(__file__))

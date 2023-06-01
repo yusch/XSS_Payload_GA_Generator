@@ -2,6 +2,7 @@ import os
 import sys
 import configparser
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 from util import Utilty
 from ga_main import GeneticAlgorithm
 from jinja2 import Environment, FileSystemLoader
@@ -50,7 +51,7 @@ if __name__ == "__main__":
     for browser in driver_list:
         # Create Web driver.
         obj_browser = webdriver.Firefox(
-            executable_path=util.join_path(driver_dir, browser))
+            executable_path="./web_driver/geckodriver")
         # util.print_message(NOTE, 'Launched : {} {}'.format(
         #   obj_browser.capabilities['browserName'], obj_browser.capabilities['browserVerion']))
 

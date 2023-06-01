@@ -46,7 +46,7 @@ class GeneticAlgorithm:
     def __init__(self, template, browser):
         self.util = Utilty()
         self.template = template
-        self.browser = browser
+        self.obj_browser = browser
 
         # Read config.ini
         full_path = os.path.dirname(os.path.abspath(__file__))
@@ -85,7 +85,9 @@ class GeneticAlgorithm:
         html_checker_dir = self.util.join_path(
             full_path, config['Genetic']['html_checker_dir'])
         self.html_checker = self.util.join_path(
-            html_checker_dir, config['Genetic']['html_checker_file'])
+            # html_checker_dir,
+            str(""),
+            config['Genetic']['html_checker_file'])
         self.html_checker_option = config['Genetic']['html_checker_option']
         self.html_checked_path = self.util.join_path(
             self.html_dir, config['Genetic']['html_checked_file'])
@@ -100,7 +102,7 @@ class GeneticAlgorithm:
     # Create population.
     def create_genom(self, df_gene):
         lst_gene = []
-        for _ in range(self.geneom_length):
+        for _ in range(self.genom_length):
             lst_gene.append(random.randint(0, len(df_gene.index) - 1))
         self.util.print_message(
             OK, 'Create individual : {}. '.format(lst_gene))
@@ -112,19 +114,17 @@ class GeneticAlgorithm:
         individual = self.util.transform_gene_num2str(
             df_gene, obj_ga.genom_list)
         html = self.template.render({eval_place: individual})
-        eval_html_path = self.tuil.join_path(
+        eval_html_path = self.util.join_path(
             self.html_dir, self.html_file.replace('*', str(individual_idx)))
         with codecs.open(eval_html_path, 'w', 'utf-8') as fout:
             fout.write(html)
 
         # Evalute html syntax using tidy.
-        command = self.html_checker + ' ' + self.html_checker_option + \
-            ' ' + self.html_checked_path + ' ' + eval_html_path
         enc = locale.getpreferredencoding()
         env_tmp = os.environ.copy()
         env_tmp['PYTHONIOENCODING'] = enc
-        subprocess.Popen(command, stdout=subprocess.PIPE,
-                         stderr=subprocess.PIPE, env=env_tmp)
+        subprocess.Popen(
+            [self.html_checker, self.html_checker_option, self.html_checked_path, eval_html_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env_tmp)
 
         # Check html checked result.
         str_eval_result = ''
