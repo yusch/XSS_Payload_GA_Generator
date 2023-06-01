@@ -162,9 +162,11 @@ class GeneticAlgorithm:
                 [eval_place, obj_ga.genom_list, individual])
 
             # Output evaluation results.
-            self.util.print_message(OK,  'Evaluation result : Browser={} {}, '
+            # self.util.print_message(OK,  'Evaluation result : Browser={} {}, '
+            self.util.print_message(OK,  'Evaluation result : Browser={}, '
                                     'Individual="{} ({})", '
-                                    'Score={}'.format(self.obj_brwoser.name, self.obj_brwoser.capabilities['version'], individual, obj_ga.genom_list, str(int_score)))
+                                    # 'Score={}'.format(self.obj_browser.name, self.obj_browser.capabilities['version'], individual, obj_ga.genom_list, str(int_score)))
+                                    'Score={}'.format(self.obj_browser.name, individual, obj_ga.genom_list, str(int_score)))
         return int_score, 0
 
     # Select elite individual.
