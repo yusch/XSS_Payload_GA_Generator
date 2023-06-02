@@ -9,6 +9,7 @@ from datetime import datetime
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.common.exceptions import NoAlertPresentException
 
 # Printing colors
 OK_BLUE = '\033[94m'      # [*]
@@ -159,7 +160,8 @@ class Utilty:
             obj_browser.get(
                 "file://" + eval_html_path)
         except Exception as e:
-            obj_browser.switch_to.alert.dismiss()
+            # if obj_browser.switch_to.alert:
+            #     obj_browser.switch_to.alert.accept()
             error_flag = True
             return int_score, error_flag
 
@@ -169,14 +171,28 @@ class Utilty:
             obj_browser.execute_script("window.scrollTo(10, 10)")
             obj_browser.refresh()
         except Exception as e:
-            # Run script.
-
-            # Check if alert is present and accept it.
-            try:
-                if obj_browser.switch_to.alert:
-                    obj_browser.switch_to.alert.dismiss()
-            except:
-                pass
+            # Handle multiple alerts.
+            while True:
+                try:
+                    alert = obj_browser.switch_to.alert
+                    alert_text = alert.text
+                    alert.accept()
+                    # Process the alert based on its type.
+                    if "prompt" in alert_text:
+                        # Handle prompt.
+                        alert.send_keys('')
+                        alert.accept()
+                        pass
+                    elif "confirm" in alert_text:
+                        # Handle confirm.
+                        alert.dismiss()
+                        pass
+                    elif "alert" in alert_text:
+                        # Handle alert.
+                        alert.accept()
+                        pass
+                except NoAlertPresentException:
+                    break
 
             int_score = 1
 

@@ -1,18 +1,19 @@
+line 1 column 1 - Warning: <select> missing '>' for end of tag
 line 1 column 1 - Warning: missing <!DOCTYPE> declaration
-line 1 column 1 - Warning: plain text isn't allowed in <head> elements
-line 1 column 1 - Info: <head> previously mentioned
 line 1 column 1 - Warning: inserting implicit <body>
-line 1 column 17 - Warning: <embed> missing '>' for end of tag
-line 1 column 24 - Warning: <body> missing '>' for end of tag
-line 1 column 24 - Warning: discarding unexpected <body>
-line 1 column 30 - Warning: <a> attribute "/" lacks value
-line 1 column 30 - Warning: <a> missing '>' for end of tag
-line 1 column 33 - Warning: <iframe> attribute "/" lacks value
-line 1 column 33 - Warning: missing </iframe>
-line 1 column 30 - Warning: missing </a>
+line 1 column 9 - Warning: discarding unexpected <frameset>
+line 1 column 19 - Info: value for attribute "data" missing quote marks
+line 1 column 19 - Warning: discarding unexpected <frame>
+line 1 column 1 - Warning: missing </select>
 line 1 column 1 - Warning: inserting missing 'title' element
+line 1 column 1 - Warning: trimming empty <select>
 Info: Document content looks like HTML5
-Tidy found 12 warnings and 0 errors!
+Tidy found 8 warnings and 0 errors!
+
+One or more empty elements were present in the source document but
+dropped on output. If these elements are necessary or you don't want
+this behavior, then consider setting the option "drop-empty-elements"
+to no.
 
 About HTML Tidy: https://github.com/htacg/tidy-html5
 Bug reports and comments: https://github.com/htacg/tidy-html5/issues
