@@ -154,10 +154,12 @@ class Utilty:
 
         # Refresh browser for next evaluation.
         try:
+            obj_browser.execute_script(
+                "window.onbeforeunload = function() {};")
             obj_browser.get(
                 "file://" + eval_html_path)
         except Exception as e:
-            obj_browser.switch_to.alert.accept()
+            obj_browser.switch_to.alert.dismiss()
             error_flag = True
             return int_score, error_flag
 
@@ -172,7 +174,7 @@ class Utilty:
             # Check if alert is present and accept it.
             try:
                 if obj_browser.switch_to.alert:
-                    obj_browser.switch_to.alert.accept()
+                    obj_browser.switch_to.alert.dismiss()
             except:
                 pass
 
