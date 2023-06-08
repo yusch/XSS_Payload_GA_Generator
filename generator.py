@@ -60,11 +60,11 @@ if __name__ == "__main__":
         obj_browser.set_window_position(position_width, position_height)
 
         # Create a few indiciduals from gene list.
-        for idx in range(max_try_num):
-            util.print_message(
-                NONE, '{}/{} Create individuals using Genetic Algorithm.'.format(idx + 1, max_try_num))
-            ga = GeneticAlgorithm(template, obj_browser)
-            individual_list = ga.main()
+#        for idx in range(max_try_num):
+#            util.print_message(
+#                NONE, '{}/{} Create individuals using Genetic Algorithm.'.format(idx + 1, max_try_num))
+#            ga = GeneticAlgorithm(template, obj_browser)
+#            individual_list = ga.main()
 
         # Generate many individuals from ga result.
         util.print_message(

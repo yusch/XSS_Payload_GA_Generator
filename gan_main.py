@@ -102,17 +102,15 @@ class GAN:
         return forward
 
     # Build discriminator model.
-    def discriminator_model(self):
-        def forward(x):
-            x = F.leaky_relu(F.linear(x, torch.zeros(
-                self.genom_length, self.genom_length*10)), 0.2)
-            x = F.leaky_relu(F.linear(x, torch.zeros(
-                self.genom_length*10, self.genom_length*10)), 0.2)
-            x = F.linear(x, torch.zeros(self.genom_length*10, 1))
-            x = torch.sigmoid(x)
-            return x
+    def discriminator_model(x, input_size):
 
-        return forward
+        x = F.leaky_relu(F.linear(x, torch.zeros(
+            input_size, input_size*10)), 0.2)
+        x = F.leaky_relu(F.linear(x, torch.zeros(
+            input_size*10, input_size*10)), 0.2)
+        x = F.linear(x, torch.zeros(input_size*10, 1))
+        x = torch.sigmoid(x)
+        return x
 
     # Train GAN model (generate injection codes).
     def train(self, list_sigs):
