@@ -86,40 +86,39 @@ class GAN:
 
     # Build generator model.
     def generator_model(self):
-        def forward(x):
-            x = F.leaky_relu(F.linear(x, torch.zeros(
-                self.input_size, self.input_size*10)), 0.2)
-            x = F.dropout(x, 0.5, training=True)
-            x = F.leaky_relu(F.linear(x, torch.zeros(
-                self.input_size*10, self.input_size*10)), 0.2)
-            x = F.dropout(x, 0.5, training=True)
-            x = F.leaky_relu(F.linear(x, torch.zeros(
-                self.input_size*10, self.input_size*5)), 0.2)
-            x = F.dropout(x, 0.5, training=True)
-            x = torch.tanh(F.linear(x, torch.zeros(
-                self.input_size*5, self.genom_length)))
-            return x
-        return forward
+        model = nn.Sequential(
+            nn.Linear(self.input_size, self.input_size*10),
+            nn.LeakyReLU(0.2),
+            nn.Dropout(0.5),
+            nn.Linear(self.input_size*10, self.input_size*10),
+            nn.LeakyReLU(0.2),
+            nn.Dropout(0.5),
+            nn.Linear(self.input_size*10, self.input_size*5),
+            nn.LeakyReLU(0.2),
+            nn.Dropout(0.5),
+            nn.Linear(self.input_size*5, self.genom_length),
+            nn.Tanh()
+        )
+        return model
 
-    # Build discriminator model.
-    def discriminator_model(x, input_size):
-
-        x = F.leaky_relu(F.linear(x, torch.zeros(
-            input_size, input_size*10)), 0.2)
-        x = F.leaky_relu(F.linear(x, torch.zeros(
-            input_size*10, input_size*10)), 0.2)
-        x = F.linear(x, torch.zeros(input_size*10, 1))
-        x = torch.sigmoid(x)
-        return x
+# Build discriminator model.
+    def discriminator_model(self):
+        model = nn.Sequential(
+            nn.Linear(self.genom_length, self.genom_length*10),
+            nn.LeakyReLU(0.2),
+            nn.Linear(self.genom_length*10, self.genom_length*10),
+            nn.LeakyReLU(0.2),
+            nn.Linear(self.genom_length*10, 1),
+            nn.Sigmoid()
+        )
+        return model
 
     # Train GAN model (generate injection codes).
     def train(self, list_sigs):
         # Load train data (=ga result).
-        X_train = np.array([])
-        for sig in list_sigs:
-            X_train = np.concatenate((X_train, sig), axis=0)
-        X_train = np.array(X_train)
-        X_train = (X_train.astype(np.float32) - self.flt_size) / self.flt_size
+        del list_sigs[0:10]
+        X_train = torch.tensor(list_sigs, dtype=torch.float32)
+        X_train = (X_train - self.flt_size) / self.flt_size
 
         # Build discriminator.
         discriminator = self.discriminator_model()
@@ -129,8 +128,8 @@ class GAN:
 
         # Build generator and discriminator (fixed weight of discriminator).
         discriminator.trainable = False
-        self.generator = self.generator_model()
-        g_opt = optim.SGD(self.generator.parameters(), lr=0.1, momentum=0.3)
+        generator = self.generator_model()
+        g_opt = optim.SGD(generator.parameters(), lr=0.1, momentum=0.3)
 
         # Execute train.
         num_batches = int(len(X_train) / self.batch_size)
@@ -142,7 +141,7 @@ class GAN:
                     np.random.uniform(-1, 1, size=(self.batch_size, self.input_size)), dtype=torch.float32)
 
                 # Generate new injection code using noise.
-                generated_codes = self.generator(noise)
+                generated_codes = generator(noise)
 
                 # Update weight of discriminator.
                 image_batch = torch.tensor(
@@ -150,6 +149,7 @@ class GAN:
                 X = image_batch
                 y = torch.tensor([np.random.uniform(0.7, 1.2)
                                  for _ in range(self.batch_size)], dtype=torch.float32)
+                y = torch.reshape(y, (self.batch_size, 1))
                 d_opt.zero_grad()
                 d_output = discriminator(X)
                 d_loss_real = criterion(d_output, y)
@@ -158,6 +158,7 @@ class GAN:
                 X = generated_codes
                 y = torch.tensor([np.random.uniform(0.0, 0.3)
                                  for _ in range(self.batch_size)], dtype=torch.float32)
+                y = torch.reshape(y, (self.batch_size, 1))
                 d_output = discriminator(X.detach())
                 d_loss_fake = criterion(d_output, y)
                 d_loss_fake.backward()
@@ -168,9 +169,9 @@ class GAN:
                 noise = torch.tensor(
                     np.random.uniform(-1, 1, size=(self.batch_size, self.input_size)), dtype=torch.float32)
                 g_opt.zero_grad()
-                g_output = discriminator(self.generator(noise))
+                g_output = discriminator(generator(noise))
                 g_loss = criterion(g_output, torch.ones(
-                    self.batch_size, dtype=torch.float32))
+                    self.batch_size, 1, dtype=torch.float32))
                 g_loss.backward()
                 g_opt.step()
 
@@ -215,9 +216,9 @@ class GAN:
 
             # TODO: Perform weight saving of networks each epoch
             # Save weights of network each epoch.
-            self.generator.save_weights(self.utl.join_path(
+            torch.save(generator, self.util.join_path(
                 self.weight_dir, self.gen_weight_file.replace('*', str(epoch))))
-            discriminator.save_weights(self.utl.join_path(
+            torch.save(discriminator, self.util.join_path(
                 self.weight_dir, self.dis_weight_file.replace('*', str(epoch))))
 
         return lst_scripts
