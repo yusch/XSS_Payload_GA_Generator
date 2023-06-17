@@ -14,6 +14,7 @@ import torchvision
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
 from util import Utilty
+from tqdm import tqdm
 
 # Type of printing.
 OK = 'ok'         # [*]
@@ -134,7 +135,7 @@ class GAN:
         # Execute train.
         num_batches = int(len(X_train) / self.batch_size)
         lst_scripts = []
-        for epoch in range(self.num_epoch):
+        for epoch in tqdm(range(self.num_epoch), desc='Execute train.'):
             for batch in range(num_batches):
                 # Create noise for inputting to generator.
                 noise = torch.tensor(
@@ -238,7 +239,7 @@ class GAN:
 
     # Mean of two vectors.
 
-    def mean_vector(self, vector1, vector2):
+    def vector_mean(self, vector1, vector2):
         return (vector1 + vector2) / 2
 
     # Main control.
@@ -252,20 +253,19 @@ class GAN:
         # Start generating injection code.
         if os.path.exists(self.weight_path):
             # Load trained model.
-            self.generator = self.generator_model()
-            self.generator.load_state_dict(
-                torch.load(self.weight_path))
+            generator = self.generator_model()
+            generator = torch.load(self.weight_path)
 
             # Explore the valid injection codes.
             valid_code_list = []
             result_list = []
-            for idx in range(self.max_explore_codes_num):
+            for idx in tqdm(range(self.max_explore_codes_num), desc='Explore valid injection code'):
                 self.util.print_message(
                     NOTE, '{}/{} Explore valid injection code.'.format(idx + 1, self.max_explore_codes_num))
                 # Generate injection codes.
                 noise = torch.tensor(
                     [np.random.uniform(-1, 1, self.input_size) for _ in range(1)], dtype=torch.float32)
-                generated_codes = self.generator(noise)
+                generated_codes = generator(noise)
                 str_html = self.util.transform_gene_num2str(
                     self.df_genes, self.transform_code2gene(generated_codes[0]))
 

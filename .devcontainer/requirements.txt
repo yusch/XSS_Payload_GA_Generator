@@ -4,3 +4,4 @@ pandas==1.5.3
 selenium==4.9.1
 torch==2.0.1
 torchvision==0.15.2
+tqdm==4.64.1

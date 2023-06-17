@@ -10,6 +10,7 @@ import subprocess
 import re
 from decimal import Decimal
 from util import Utilty
+from tqdm import tqdm
 
 # Type of printing.
 OK = 'ok'         # [*]
@@ -258,7 +259,7 @@ class GeneticAlgorithm:
                 current_generation.append(self.create_genom(df_genes))
 
             # Evaluate each generation.
-            for int_count in range(1, self.max_generation + 1):
+            for int_count in tqdm(range(1, self.max_generation + 1), desc='Generation'):
                 self.util.print_message(NOTE, 'Evaluate individual : {}/{} generation.'.format(str(int_count),
                                                                                                self.max_generation))
                 for indivisual, idx in enumerate(range(self.max_genom_list)):
