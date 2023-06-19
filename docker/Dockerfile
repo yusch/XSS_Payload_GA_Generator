@@ -1,4 +1,5 @@
 FROM pytorch/pytorch:2.0.0-cuda11.7-cudnn8-devel
+FROM selenium/standalone-firefox:latest
 
 RUN apt-get update && apt-get install -y \
     libglib2.0-0 \

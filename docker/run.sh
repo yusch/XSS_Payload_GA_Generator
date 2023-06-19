@@ -6,6 +6,7 @@ PROJECT_DIR="$(cd "$(dirname "${0}")/.." || exit; pwd)"
 # run
 docker run -it --rm \
   --shm-size=8g \
+  -p 4444:4444 -p 7900:7900 \
   --gpus all \
   -v "${PROJECT_DIR}:/work" \
   -w "/work" \
