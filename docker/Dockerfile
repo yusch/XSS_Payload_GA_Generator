@@ -8,9 +8,6 @@ RUN apt-get update && apt-get install -y \
     wget \
     tidy
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
 # cuda path
 ENV LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64"
 ENV CUDA_HOME=/usr/local/cuda
@@ -26,5 +23,7 @@ RUN wget https://www.python.org/ftp/python/3.11.4/Python-3.11.4.tgz \
     && ln -sf /usr/local/bin/python3.11 /usr/bin/python3 \
     && ln -sf /usr/local/bin/python3.11 /usr/bin/python
 
+COPY requirements.txt .
+RUN python3 -m pip install -U --no-cache-dir pip==23.1.2 -r requirements.txt
 
 FROM selenium/standalone-firefox:latest
