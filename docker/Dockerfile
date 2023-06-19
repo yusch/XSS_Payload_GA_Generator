@@ -24,6 +24,7 @@ RUN wget https://www.python.org/ftp/python/3.11.4/Python-3.11.4.tgz \
     && ln -sf /usr/local/bin/python3.11 /usr/bin/python
 
 COPY requirements.txt .
-RUN python3 -m pip install -U --no-cache-dir pip==23.1.2 -r requirements.txt
+RUN python3 -m pip install -U --no-cache-dir pip==23.1.2 \
+    pip install --no-cache-dir -r requirements.txt
 
 FROM selenium/standalone-firefox:latest
