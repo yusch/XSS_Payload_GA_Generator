@@ -17,7 +17,7 @@ RUN wget https://www.python.org/ftp/python/3.11.4/Python-3.11.4.tgz \
     && tar -xvf Python-3.11.4.tgz \
     && cd Python-3.11.4 \
     && ./configure --enable-optimizations --enable-shared \
-    && altinstall \
+    && make altinstall \
     && ldconfig \
     && rm -rf Python-3.11.4.tgz /opt/Python-3.11.4 \
     && ln -sf /usr/local/bin/python3.11 /opt/conda/usr/bin/python3 \
