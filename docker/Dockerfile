@@ -1,12 +1,24 @@
 FROM pytorch/pytorch:2.0.0-cuda11.7-cudnn8-devel
 
-RUN apt-get update && apt-get install -y \
-    libglib2.0-0 \
-    libnss3 \
-    libgconf-2-4 \
-    libfontconfig1 \
-    wget \
+RUN apt update \
+    && apt install -y \
+    libgl1-mesa-dev \
+    libssl-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    zlib1g-dev \
+    libjpeg-dev \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libavcodec-dev libavformat-dev libswscale-dev \
+    libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev \
+    wget\
     tidy
+&& apt clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # cuda path
 ENV LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64"
@@ -25,4 +37,4 @@ RUN wget https://www.python.org/ftp/python/3.11.4/Python-3.11.4.tgz \
 
 COPY requirements.txt .
 RUN python3 -m pip install -U --no-cache-dir pip==23.1.2 \
-    && pip install --no-cache-dir -r requirements.txt
+    pip install --no-cache-dir -r requirements.txt
