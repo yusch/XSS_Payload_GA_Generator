@@ -36,8 +36,6 @@ if __name__ == "__main__":
     max_try_num = int(config['Genetic']['max_try_num'])
 
     # Selenium setting value.
-    driver_dir = util.join_path(full_path, config['Selenium']['driver_dir'])
-    driver_list = config['Selenium']['driver_list'].split('@')
     window_width = int(config['Selenium']['window_width'])
     window_height = int(config['Selenium']['window_height'])
     position_width = int(config['Selenium']['position_width'])
@@ -61,12 +59,6 @@ if __name__ == "__main__":
             NONE, '{}/{} Create individuals using Genetic Algorithm.'.format(idx + 1, max_try_num))
         ga = GeneticAlgorithm(template, obj_browser)
         individual_list = ga.main()
-
-    # Generate many individuals from ga result.
-    util.print_message(
-        NOTE, 'Generate individual using Generative Adversarial Network.')
-    gan = GAN(template, obj_browser)
-    gan.main()
 
     # Close browser.
     obj_browser.close()
