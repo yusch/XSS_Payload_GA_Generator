@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
     # Setting template.
     env = Environment(loader=FileSystemLoader(html_dir))
-    template = env.get_tmplate(html_template)
+    template = env.get_template(html_template)
 
     # Create Web driver.
     obj_browser = webdriver.Firefox(

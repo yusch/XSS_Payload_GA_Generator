@@ -20,6 +20,7 @@ RUN apt update \
     libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev \
     wget \
     tidy \
+    neovim \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -41,3 +42,5 @@ RUN wget https://www.python.org/ftp/python/3.11.4/Python-3.11.4.tgz \
 COPY requirements.txt .
 RUN python3 -m pip --no-cache-dir install -U pip==23.1.2
 RUN python3 -m pip --no-cache-dir install -r requirements.txt
+RUN pip install torch
+RUN pip install torchvision
