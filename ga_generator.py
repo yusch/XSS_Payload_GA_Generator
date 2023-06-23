@@ -1,5 +1,6 @@
 import os
 import sys
+import datetime
 import configparser
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
@@ -53,12 +54,22 @@ if __name__ == "__main__":
     obj_browser.set_window_size(window_width, window_height)
     obj_browser.set_window_position(position_width, position_height)
 
+    # output print function's contents.
+    now = datetime.datetime.now()
+    stdout_log_filename = './result/log_' + \
+        now.strftime('%Y%m%d%H%M%S') + '.txt'
+    sys.stdout = open(stdout_log_filename, 'w')
+
     # Create a few individuals from gene list.
     for idx in range(max_try_num):
         util.print_message(
             NONE, '{}/{} Create individuals using Genetic Algorithm.'.format(idx + 1, max_try_num))
         ga = GeneticAlgorithm(template, obj_browser)
         individual_list = ga.main()
+
+    # end stdou
+    sys.stdout.close()
+    sys.stdout = sys.__stdout__
 
     # Close browser.
     obj_browser.close()
