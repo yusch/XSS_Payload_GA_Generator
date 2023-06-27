@@ -10,6 +10,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import NoAlertPresentException
+from tqdm import tqdm
 
 # Printing colors
 OK_BLUE = '\033[94m'      # [*]
@@ -58,15 +59,15 @@ class Utilty:
                 print('[*] ' + message)
         else:
             if type == NOTE:
-                print(PRINT_NOTE + ' ' + message)
+                tqdm.write(PRINT_NOTE + ' ' + message)
             elif type == FAIL:
-                print(PRINT_FAIL + ' ' + message)
+                tqdm.write(PRINT_FAIL + ' ' + message)
             elif type == WARNING:
-                print(PRINT_WARN + ' ' + message)
+                tqdm.write(PRINT_WARN + ' ' + message)
             elif type == NONE:
-                print(NOTE_GREEN + message + ENDC)
+                tqdm.write(NOTE_GREEN + message + ENDC)
             else:
-                print(PRINT_OK + ' ' + message)
+                tqdm.write(PRINT_OK + ' ' + message)
 
     # Print exception messages.
     def print_exception(self, e, message):

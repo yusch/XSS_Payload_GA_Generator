@@ -9,6 +9,7 @@ from ga_main import GeneticAlgorithm
 from jinja2 import Environment, FileSystemLoader
 from gan_main import GAN
 from tqdm import tqdm
+import setup_log
 
 # Type of printing.
 OK = 'ok'         # [*]
@@ -47,19 +48,20 @@ if __name__ == "__main__":
     env = Environment(loader=FileSystemLoader(html_dir))
     template = env.get_template(html_template)
 
+    # Headless mode option
+    options = Options()
+    options.add_argument('--headless')
+
     # Create Web driver.
     obj_browser = webdriver.Firefox(
-        executable_path="./web_driver/geckodriver")
+        executable_path="./web_driver/geckodriver", options=options)
 
     # Browser setting.
     obj_browser.set_window_size(window_width, window_height)
     obj_browser.set_window_position(position_width, position_height)
 
-    # output print function's contents.
-    now = datetime.datetime.now()
-    stdout_log_filename = './result/log_' + \
-        now.strftime('%Y%m%d%H%M%S') + '.txt'
-    sys.stdout = open(stdout_log_filename, 'w')
+    # output print function's contetnts to terminal and log file
+    sys.stdout = setup_log.Logger()
 
     # Create a few individuals from gene list.
     for idx in tqdm(range(max_try_num), desc='main loop'):
@@ -68,9 +70,9 @@ if __name__ == "__main__":
         ga = GeneticAlgorithm(template, obj_browser)
         individual_list = ga.main()
 
-    # end stdou
-    sys.stdout.close()
-    sys.stdout = sys.__stdout__
+    # end stdout
+    # sys.stdout.close()
+    # sys.stdout = sys.__stdout__
 
     # Close browser.
     obj_browser.close()

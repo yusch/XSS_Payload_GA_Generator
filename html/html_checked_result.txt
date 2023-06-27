@@ -2,19 +2,9 @@ line 1 column 1 - Warning: missing <!DOCTYPE> declaration
 line 1 column 1 - Warning: plain text isn't allowed in <head> elements
 line 1 column 1 - Info: <head> previously mentioned
 line 1 column 1 - Warning: inserting implicit <body>
-line 1 column 32 - Warning: <input> attribute with missing trailing quote mark
-line 1 column 32 - Warning: <input> missing '>' for end of tag
-line 1 column 112 - Warning: <image> end of file while parsing attributes
-line 1 column 100 - Error: <image> is not recognized!
-line 1 column 100 - Warning: discarding unexpected <image>
 line 1 column 1 - Warning: inserting missing 'title' element
-line 1 column 32 - Warning: <input> proprietary attribute "ng-focus"
-line 1 column 32 - Warning: <input> proprietary attribute "javascript:x"
 Info: Document content looks like HTML5
-Tidy found 10 warnings and 1 error!
-
-This document has errors that must be fixed before
-using HTML Tidy to generate a tidied up version.
+Tidy found 4 warnings and 0 errors!
 
 About HTML Tidy: https://github.com/htacg/tidy-html5
 Bug reports and comments: https://github.com/htacg/tidy-html5/issues

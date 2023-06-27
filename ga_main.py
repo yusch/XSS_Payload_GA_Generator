@@ -242,7 +242,7 @@ class GeneticAlgorithm:
         # Create saving file (only header).
         now = datetime.datetime.now()
         save_path = self.util.join_path(
-            self.result_dir, self.result_file.replace('*', str(now.strftime('%Y%m%d%H%M%S'))))
+            self.result_dir, self.result_file.replace('*', str(now.strftime('%Y%m%d%H%M'))))
         if os.path.exists(save_path) is False:
             pd.DataFrame([], columns=['eval_place', 'sig_vector', 'sig_string']).to_csv(save_path,
                                                                                         mode='w',
