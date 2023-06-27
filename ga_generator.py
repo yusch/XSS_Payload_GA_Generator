@@ -8,6 +8,7 @@ from util import Utilty
 from ga_main import GeneticAlgorithm
 from jinja2 import Environment, FileSystemLoader
 from gan_main import GAN
+from tqdm import tqdm
 
 # Type of printing.
 OK = 'ok'         # [*]
@@ -61,7 +62,7 @@ if __name__ == "__main__":
     sys.stdout = open(stdout_log_filename, 'w')
 
     # Create a few individuals from gene list.
-    for idx in range(max_try_num):
+    for idx in tqdm(range(max_try_num), desc='main loop'):
         util.print_message(
             NONE, '{}/{} Create individuals using Genetic Algorithm.'.format(idx + 1, max_try_num))
         ga = GeneticAlgorithm(template, obj_browser)

@@ -11,6 +11,7 @@ import re
 from decimal import Decimal
 from util import Utilty
 from tqdm import tqdm
+import datetime
 
 # Type of printing.
 OK = 'ok'         # [*]
@@ -239,8 +240,9 @@ class GeneticAlgorithm:
         df_genes = pd.read_csv(self.genes_path, encoding='utf-8').fillna('')
 
         # Create saving file (only header).
+        now = datetime.datetime.now()
         save_path = self.util.join_path(
-            self.result_dir, self.result_file.replace('*', "firefox"))
+            self.result_dir, self.result_file.replace('*', str(now.strftime('%Y%m%d%H%M%S'))))
         if os.path.exists(save_path) is False:
             pd.DataFrame([], columns=['eval_place', 'sig_vector', 'sig_string']).to_csv(save_path,
                                                                                         mode='w',
@@ -259,7 +261,7 @@ class GeneticAlgorithm:
                 current_generation.append(self.create_genom(df_genes))
 
             # Evaluate each generation.
-            for int_count in tqdm(range(1, self.max_generation + 1), desc='Generation'):
+            for int_count in tqdm(range(1, self.max_generation + 1), desc='max generation'):
                 self.util.print_message(NOTE, 'Evaluate individual : {}/{} generation.'.format(str(int_count),
                                                                                                self.max_generation))
                 for indivisual, idx in enumerate(range(self.max_genom_list)):
@@ -318,10 +320,14 @@ class GeneticAlgorithm:
                 if flt_avg > self.max_fitness:
                     self.util.print_message(
                         NOTE, 'Finish evolution: average={}'.format(str(flt_avg)))
+                    tqdm.write(
+                        'Finish evolution: average={}'.format(str(flt_avg)))
                     break
 
                 # Replace current generation and next generation.
                 current_generation = next_generation_individual_group
+                tqdm.write(
+                    'generation change! flt_avg={}'.format(str(flt_avg)))
 
         # Save individuals.
         pd.DataFrame(self.result_list).to_csv(
