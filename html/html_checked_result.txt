@@ -1,30 +1,31 @@
-line 1 column 1 - Info: value for attribute "form" missing quote marks
 line 1 column 1 - Warning: missing <!DOCTYPE> declaration
+line 1 column 1 - Warning: plain text isn't allowed in <head> elements
+line 1 column 1 - Info: <head> previously mentioned
 line 1 column 1 - Warning: inserting implicit <body>
-line 1 column 48 - Info: value for attribute "id" missing quote marks
-line 1 column 48 - Warning: <form> attribute ")));" lacks value
-line 1 column 48 - Warning: <form> missing '>' for end of tag
-line 1 column 1 - Warning: missing </button> before <form>
-line 1 column 117 - Warning: inserting implicit <button>
-line 1 column 117 - Warning: <canvas> attribute "/" lacks value
-line 1 column 117 - Warning: missing </button> before <canvas>
-line 1 column 125 - Warning: inserting implicit <button>
-line 1 column 125 - Warning: missing </button>
-line 1 column 117 - Warning: missing </canvas>
-line 1 column 48 - Warning: missing </form>
+line 1 column 129 - Warning: <img> end of file while parsing attributes
 line 1 column 1 - Warning: inserting missing 'title' element
-line 1 column 48 - Warning: <form> illegal characters found in URI
-line 1 column 1 - Warning: trimming empty <button>
-line 1 column 117 - Warning: trimming empty <button>
-line 1 column 125 - Warning: trimming empty <button>
+line 1 column 41 - Warning: <img> escaping malformed URI reference
+line 1 column 41 - Warning: <img> illegal characters found in URI
+line 1 column 41 - Warning: <img> lacks "alt" attribute
 Info: Document content looks like HTML5
-Tidy found 17 warnings and 0 errors!
+Tidy found 8 warnings and 0 errors!
 
-One or more empty elements were present in the source document but
-dropped on output. If these elements are necessary or you don't want
-this behavior, then consider setting the option "drop-empty-elements"
-to no.
+URIs must be properly escaped, they must not contain unescaped
+characters below U+0021 including the space character and not
+above U+007E. Tidy escapes the URI for you as recommended by
+HTML 4.01 section B.2.1 and XML 1.0 section 4.2.2. Some user agents
+use another algorithm to escape such URIs and some server-sided
+scripts depend on that. If you want to depend on that, you must
+escape the URI on your own. For more information please refer to
+http://www.w3.org/International/O-URL-and-ident.html
 
+The alt attribute should be used to give a short description
+of an image; longer descriptions should be given with the
+longdesc attribute which takes a URL linked to the description.
+These measures are needed for people using non-graphical browsers.
+
+For further advice on how to make your pages accessible
+see http://www.w3.org/WAI/GL.
 About HTML Tidy: https://github.com/htacg/tidy-html5
 Bug reports and comments: https://github.com/htacg/tidy-html5/issues
 Official mailing list: https://lists.w3.org/Archives/Public/public-htacg/
