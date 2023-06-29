@@ -22,7 +22,6 @@ WARNING = 'warn'  # [!]
 NONE = 'none'     # No label.
 
 
-
 # Container of genes.
 
 
@@ -49,7 +48,6 @@ class Gene:
 
 # Genetic algorithm.
 class GeneticAlgorithm:
-
 
     def __init__(self, template, browser):
         self.util = Utilty()
@@ -345,7 +343,6 @@ class GeneticAlgorithm:
                 self.ax.set_xlabel('Time [$sec$]')
                 self.ax.set_ylabel('fitness average score')
                 plt.pause(0.1)
-
 
         # Save individuals.
         pd.DataFrame(self.result_list).to_csv(
