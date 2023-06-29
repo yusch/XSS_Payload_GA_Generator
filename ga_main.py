@@ -12,6 +12,7 @@ from decimal import Decimal
 from util import Utilty
 from tqdm import tqdm
 import datetime
+import matplotlib.pyplot as plt
 
 # Type of printing.
 OK = 'ok'         # [*]
@@ -21,7 +22,10 @@ WARNING = 'warn'  # [!]
 NONE = 'none'     # No label.
 
 
+
 # Container of genes.
+
+
 class Gene:
     genom_list = None
     evaluation = None
@@ -45,10 +49,19 @@ class Gene:
 
 # Genetic algorithm.
 class GeneticAlgorithm:
+
+
     def __init__(self, template, browser):
         self.util = Utilty()
         self.template = template
         self.obj_browser = browser
+
+        # start timer
+        self.start = time.time()
+
+        # plot graph
+        self.xs, self.y = [], []
+        self.fig, self.ax = plt.subplots()
 
         # Read config.ini
         full_path = os.path.dirname(os.path.abspath(__file__))
@@ -96,7 +109,6 @@ class GeneticAlgorithm:
         self.html_eval_place_list = config['Genetic']['html_eval_place'].split(
             '@')
         self.bingo_score = float(config['Genetic']['bingo_score'])
-        self.warning_score = float(config['Genetic']['warning_score'])
         self.error_score = float(config['Genetic']['error_score'])
         self.result_file = config['Genetic']['result_file']
         self.result_list = []
@@ -164,11 +176,9 @@ class GeneticAlgorithm:
                 [eval_place, obj_ga.genom_list, individual])
 
             # Output evaluation results.
-            # self.util.print_message(OK,  'Evaluation result : Browser={} {}, '
-            self.util.print_message(OK,  'Evaluation result : Browser={}, '
-                                    'Individual="{} ({})", '
-                                    # 'Score={}'.format(self.obj_browser.name, self.obj_browser.capabilities['version'], individual, obj_ga.genom_list, str(int_score)))
-                                    'Score={}'.format(self.obj_browser.name, individual, obj_ga.genom_list, str(int_score)))
+            self.util.print_message(OK,  'Individual="{} ({})", '
+                                    'Score={}'.format(individual, obj_ga.genom_list, str(int_score)))
+
         return int_score, 0
 
     # Select elite individual.
@@ -326,8 +336,16 @@ class GeneticAlgorithm:
 
                 # Replace current generation and next generation.
                 current_generation = next_generation_individual_group
-                tqdm.write(
-                    'generation change! flt_avg={}'.format(str(flt_avg)))
+
+                # graph plot
+                plt.cla()
+                self.xs.append((time.time() - self.start))
+                self.y.append(flt_avg)
+                plt.plot(self.xs, self.y, color='C0', linestyle='-')
+                self.ax.set_xlabel('Time [$sec$]')
+                self.ax.set_ylabel('fitness average score')
+                plt.pause(0.1)
+
 
         # Save individuals.
         pd.DataFrame(self.result_list).to_csv(
