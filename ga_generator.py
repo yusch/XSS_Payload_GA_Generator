@@ -70,9 +70,5 @@ if __name__ == "__main__":
         ga = GeneticAlgorithm(template, obj_browser)
         individual_list = ga.main()
 
-    # end stdout
-    # sys.stdout.close()
-    # sys.stdout = sys.__stdout__
-
     # Close browser.
     obj_browser.close()
