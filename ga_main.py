@@ -337,10 +337,10 @@ class GeneticAlgorithm:
 
                 # graph plot
                 plt.cla()
-                self.xs.append((time.time() - self.start))
+                self.xs.append(int_count)
                 self.y.append(flt_avg)
                 plt.plot(self.xs, self.y, color='C0', linestyle='-')
-                self.ax.set_xlabel('Time [$sec$]')
+                self.ax.set_xlabel('generation')
                 self.ax.set_ylabel('fitness average score')
                 plt.pause(0.1)
 
