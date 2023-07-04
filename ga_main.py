@@ -13,6 +13,7 @@ from util import Utilty
 from tqdm import tqdm
 import datetime
 import matplotlib.pyplot as plt
+from torch.utils.tensorboard import SummaryWriter
 
 # Type of printing.
 OK = 'ok'         # [*]
@@ -247,6 +248,8 @@ class GeneticAlgorithm:
         # Load gene list.
         df_genes = pd.read_csv(self.genes_path, encoding='utf-8').fillna('')
 
+        writer = SummaryWriter(log_dir="log")
+
         # Create saving file (only header).
         now = datetime.datetime.now()
         save_path = self.util.join_path(
@@ -324,6 +327,18 @@ class GeneticAlgorithm:
                                                                                max(fits),
                                                                                flt_avg))
 
+                # tensorboard plot
+                writer.add_scalar('fitness', flt_avg, int_count)
+
+                # # graph plot
+                # plt.cla()
+                # self.xs.append(int_count)
+                # self.y.append(flt_avg)
+                # plt.plot(self.xs, self.y, color='C0', linestyle='-')
+                # self.ax.set_xlabel('generation')
+                # self.ax.set_ylabel('fitness average score')
+                # plt.pause(0.1)
+
                 # Judge fitness.
                 if flt_avg > self.max_fitness:
                     self.util.print_message(
@@ -334,15 +349,6 @@ class GeneticAlgorithm:
 
                 # Replace current generation and next generation.
                 current_generation = next_generation_individual_group
-
-                # graph plot
-                plt.cla()
-                self.xs.append(int_count)
-                self.y.append(flt_avg)
-                plt.plot(self.xs, self.y, color='C0', linestyle='-')
-                self.ax.set_xlabel('generation')
-                self.ax.set_ylabel('fitness average score')
-                plt.pause(0.1)
 
         # Save individuals.
         pd.DataFrame(self.result_list).to_csv(
