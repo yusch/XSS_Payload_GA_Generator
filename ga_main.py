@@ -1,6 +1,7 @@
 import os
 import sys
 import random
+import numpy as np
 import codecs
 import configparser
 import pandas as pd
@@ -12,8 +13,9 @@ from decimal import Decimal
 from util import Utilty
 from tqdm import tqdm
 import datetime
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from torch.utils.tensorboard import SummaryWriter
+import waf
 
 # Type of printing.
 OK = 'ok'         # [*]
@@ -59,8 +61,8 @@ class GeneticAlgorithm:
         self.start = time.time()
 
         # plot graph
-        self.xs, self.y = [], []
-        self.fig, self.ax = plt.subplots()
+        # self.xs, self.y = [], []
+        # self.fig, self.ax = plt.subplots()
 
         # Read config.ini
         full_path = os.path.dirname(os.path.abspath(__file__))
@@ -116,7 +118,7 @@ class GeneticAlgorithm:
     def create_genom(self, df_gene):
         lst_gene = []
         for _ in range(self.genom_length):
-            lst_gene.append(random.randint(0, len(df_gene.index) - 1))
+            lst_gene.append(np.random.randint(0, len(df_gene.index) - 1))
         self.util.print_message(
             OK, 'Create individual : {}. '.format(lst_gene))
         return Gene(lst_gene, 0)
@@ -155,8 +157,15 @@ class GeneticAlgorithm:
         else:
             return None, 1
 
+        # check waf
+        detected_count = waf.detect_xss(eval_html_path)
+        if detected_count > 0:
+            print(f"Found {detected_count} XSS Payloads")
+        else:
+            print("No XSS Payload found")
+
         # Compute score.
-        int_score = warnings + errors
+        int_score = warnings + errors - detected_count
 
         # Evaluate running script using selenium.
         selenium_score, error_flag = self.util.check_individual_selenium(
@@ -193,8 +202,8 @@ class GeneticAlgorithm:
         genom_list = []
 
         # Setting of two-point crossover.
-        cross_first = random.randint(0, self.genom_length)
-        cross_second = random.randint(cross_first, self.genom_length)
+        cross_first = np.random.randint(0, self.genom_length)
+        cross_second = np.random.randint(cross_first, self.genom_length)
         one = ga_first.getGenom()
         second = ga_second.getGenom()
 
@@ -228,12 +237,12 @@ class GeneticAlgorithm:
         lst_ga = []
         for idx in obj_ga:
             # Mutation to individuals.
-            if induvidual_mutation > (random.randint(0, 100) / Decimal(100)):
+            if induvidual_mutation > (np.random.randint(0, 100) / Decimal(100)):
                 lst_gene = []
                 for idx2 in idx.getGenom():
                     # Mutation to genes.
-                    if genom_mutation > (random.randint(0, 100) / Decimal(100)):
-                        lst_gene.append(random.randint(
+                    if genom_mutation > (np.random.randint(0, 100) / Decimal(100)):
+                        lst_gene.append(np.random.randint(
                             0, len(df_genes.index)-1))
                     else:
                         lst_gene.append(idx2)
