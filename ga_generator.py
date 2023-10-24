@@ -7,7 +7,6 @@ from selenium.webdriver.firefox.options import Options
 from util import Utilty
 from ga_main import GeneticAlgorithm
 from jinja2 import Environment, FileSystemLoader
-from gan_main import GAN
 from tqdm import tqdm
 import setup_log
 

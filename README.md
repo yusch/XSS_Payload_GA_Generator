@@ -7,8 +7,14 @@ XSS payload generator by using GA(Genetic Algorithm)
 
 
 ## Usage
+run generator
 ```
 python3 generator.py
+```
+
+run tensorboard
+```
+tensorboard --logdir='./log' --bind_all
 ```
 
 ## Example
